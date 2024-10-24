@@ -22,11 +22,18 @@
 ![Log do Terminal](images/image.png)
 ![Log do Terminal](images/image2.png)
 
+<br>
 
+## Executar os testes
+
+### Teste de carga(load)
 `k6 run scripts/load_test.js`
-<br>
 
+### Teste de stress
 `k6 run scripts/stress_test.js`
-<br>
 
+### Teste de pico(spike test)
 `k6 run scripts/spike_test.js`
+
+### Teste de capacidade(capacity planning)
+`k6 run scripts/capacity_planning.js`
