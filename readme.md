@@ -19,10 +19,6 @@
 `brew install k6`
 
 
-### Log Terminal
-![Log do Terminal](images/image.png)
-![Log do Terminal](images/image2.png)
-
 <br>
 
 ## Executar os testes
@@ -38,3 +34,9 @@
 
 ### Teste de stress
 `k6 run scripts/stress_test.js`
+
+<br>
+
+### Saída Terminal
+![Log do Terminal](images/image.png)
+![Log do Terminal](images/image2.png)
