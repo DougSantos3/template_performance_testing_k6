@@ -1,3 +1,7 @@
+### Node usado: 
+`20.18.0`
+
+
 ### Install linux
 `sudo apt update`
 <br>
