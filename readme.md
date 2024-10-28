@@ -41,6 +41,10 @@
 
 <br>
 
+### Monitoramento do Sistema:
+ Durante o teste de performance, observe atentamente métricas de desempenho, como uso de CPU, memória, latência de resposta e taxa de erros.
+
+
 ### Saída Terminal
 ![Log do Terminal](images/image.png)
 ![Log do Terminal](images/image2.png)
