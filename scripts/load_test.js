@@ -6,10 +6,17 @@ import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporte
 
 export let options = {
     stages: [
-        { duration: '2m', target: 1000 },  // ramp-up de 1000 usuários em 2 minutos
-        { duration: '3m', target: 1000 },  // Mantém 1000 usuários por 3 minutos
-        { duration: '1m', target: 0 },    // finaliza os testes reduzindo para 0 usuários
+      { duration: "2m", target: 500 },   // Aumenta gradualmente para 500 usuários em 2 minutos
+      { duration: "3m", target: 1000 },  // Aumenta gradualmente para 1000 usuários
+      { duration: "5m", target: 2000 },  // Mantém 2000 usuários por 5 minutos
+      { duration: "2m", target: 2000 },  // Mantém os 2000 usuários para observar estabilidade
+      { duration: "1m", target: 0 }      // Reduz para 0 ao final do teste
     ],
+    thresholds: {
+      http_req_duration: ["p(95)<500"], // 95% das respostas devem ser mais rápidas que 500ms
+      "http_req_duration{staticAsset:yes}": ["p(99)<150"], // 99% dos ativos estáticos devem carregar em menos de 150ms
+      "http_req_duration{staticAsset:no}": ["avg<200", "p(95)<400"], // Tempo médio de resposta deve ser inferior a 200ms, 95% das respostas em menos de 400ms
+    },
 }
 
 export default function () {
