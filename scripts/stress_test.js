@@ -11,6 +11,8 @@ import http from "k6/http"
 import { sleep, check } from "k6"
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
 
+const BASE_URL = 'https://your-address-api.com'
+
 export let options = {
   vus: 100,
   stages: [
@@ -29,7 +31,7 @@ export let options = {
 }
 
 export default function () {
-  let res = http.get("https://your-address-api.com/endpoint")
+  let res = http.get(`${BASE_URL}/endpoint`)
   check(res, {
     "status é 200": (r) => r.status === 200,
     "tempo de resposta < 300ms": (r) => r.timings.duration < 300,

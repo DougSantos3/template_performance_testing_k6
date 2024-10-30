@@ -11,6 +11,8 @@ Métricas Importantes:
     Erros: Monitorar possíveis falhas no início e término do pico.
  */
 
+const BASE_URL = 'https://your-address-api.com'
+
 export let options = {
   vus: 100,
   stages: [
@@ -27,11 +29,12 @@ export let options = {
 }
 
 export default function () {
-  let res = http.get("https://your-address-api.com/endpoint")
-  check(res, {
-    "status é 200": (r) => r.status === 200,
-    "tempo de resposta < 400ms": (r) => r.timings.duration < 400,
+  let resDelete = http.del(`${BASE_URL}/endpoint/${param}`)
+  check(resDelete, {
+    "DELETE status é 204": (r) => r.status === 204,
+    "DELETE tempo de resposta < 200ms": (r) => r.timings.duration < 200,
   })
+
   sleep(1)
 }
 

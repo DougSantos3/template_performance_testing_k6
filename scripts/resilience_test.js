@@ -24,6 +24,8 @@ import http from "k6/http"
 import { sleep, check } from "k6"
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
 
+const BASE_URL = 'https://your-address-api.com'
+
 export let options = {
   stages: [
     { duration: "1m", target: 500 },  // Aumenta gradualmente até 500 usuários
@@ -39,15 +41,19 @@ export let options = {
   },
 }
 
-
 export default function () {
-  let res = http.get("https://your-address-api.com/endpoint")
-  check(res, {
-    "status é 200": (r) => r.status === 200,
-    "tempo de resposta < 300ms": (r) => r.timings.duration < 300,
+  let payload = JSON.stringify({ key: "value" })
+  let params = { headers: { "Content-Type": "application/json" } }
+
+
+  let resPut = http.put(`${BASE_URL}/endpoint/${variable}`, payload, params)
+  check(resPut, {
+    "PUT status é 200": (r) => r.status === 200,
+    "PUT tempo de resposta < 200ms": (r) => r.timings.duration < 200,
   })
   sleep(1)
 }
+
 
 export function handleSummary(data) {
   const htmlFile = `report/stress_test.html`
