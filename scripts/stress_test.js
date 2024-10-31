@@ -4,14 +4,13 @@
         Taxa de Erros: Para entender o momento em que o sistema começa a falhar.
         Latência de Resposta: Para ver o quanto o desempenho se deteriora sob carga extrema.
         Recuperação Pós-Falha: Observe se o sistema consegue retornar ao normal depois que o estresse termina.
-        Recuperação e Resiliência: Um bom sistema não apenas lida bem com o estresse, mas também se recupera após o fim da carga.
-*/
+        Recuperação e Resiliência: Um bom sistema não apenas lida bem com o estresse, mas também se recupera após o fim da carga. */
 
 import http from "k6/http"
 import { sleep, check } from "k6"
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
+import { BASE_URL } from '../env/base_url.js'
 
-const BASE_URL = 'https://your-address-api.com'
 
 export let options = {
   vus: 100,

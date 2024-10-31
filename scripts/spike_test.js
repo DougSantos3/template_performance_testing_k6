@@ -1,17 +1,16 @@
-import http from "k6/http"
-import { sleep, check } from "k6"
-import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
-
 /* Objetivo: Avaliar a estabilidade e capacidade do sistema de responder a um aumento súbito de carga e a 
 recuperação quando a carga é retirada.
 
 Métricas Importantes:
     Tempo de Resposta: Para ver como o desempenho se comporta durante o pico.
     Recuperação Pós-Pico: Avaliar se o sistema consegue retomar o desempenho normal após a carga ser reduzida.
-    Erros: Monitorar possíveis falhas no início e término do pico.
- */
+    Erros: Monitorar possíveis falhas no início e término do pico. */
 
-const BASE_URL = 'https://your-address-api.com'
+import http from "k6/http"
+import { sleep, check } from "k6"
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
+import { BASE_URL } from '../env/base_url.js'
+
 
 export let options = {
   vus: 100,

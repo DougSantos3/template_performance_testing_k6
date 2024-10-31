@@ -9,14 +9,13 @@ Monitoramento do Sistema:
     Identificação do Limite: O objetivo é identificar o ponto de saturação, onde o sistema começa a não responder 
     corretamente.
     Ajustes e Retestes: Após identificar o limite, você pode ajustar recursos do sistema e realizar novos testes de 
-    capacidade para verificar a melhora.
-*/
+    capacidade para verificar a melhora. */
 
 import http from "k6/http"
 import { sleep, check } from "k6"
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
+import { BASE_URL } from '../env/base_url.js'
 
-const BASE_URL = 'https://your-address-api.com'
 
 export let options = {
   vus: 100,
