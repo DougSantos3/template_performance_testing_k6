@@ -36,6 +36,9 @@
 ### Teste de pico(spike test)
 `k6 run scripts/spike_test.js`
 
+### Teste de resiliencia
+`k6 run scripts/resilience_test.js`
+
 ### Teste de stress
 `k6 run scripts/stress_test.js`
 
