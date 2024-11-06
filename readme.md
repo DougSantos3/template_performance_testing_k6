@@ -52,7 +52,7 @@
 ![Log do Terminal](images/image.png)
 ![Log do Terminal](images/image2.png)
 
-### Sáida Html   
+### Saída Html   
 ![Log do html](images/k6_1.png)
 ![Log do html](images/k6_2.png)
 ![Log do html](images/k6_3.png)
