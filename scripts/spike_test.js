@@ -1,3 +1,9 @@
+/* O spike test é um tipo específico de teste de performance que avalia como um sistema responde a mudanças abruptas e 
+   repentinas na carga, ou seja, a picos de uso. O objetivo é verificar se o sistema consegue suportar um aumento súbito no 
+   número de usuários ou requisições e se ele consegue se recuperar adequadamente quando a carga volta ao normal. Exemplos
+   Jogo da copa do mundo no comercial é divulgada a marca e vai ter uma grande quantidade de acesso e quando voltar o jogo
+   vai cair consideravelmente */
+
 import http from "k6/http"
 import { sleep, check } from "k6"
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
