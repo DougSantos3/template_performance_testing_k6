@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://your-address-api.com'
+export const BASE_URL = 'https://httpbin.org'
