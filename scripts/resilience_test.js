@@ -55,7 +55,7 @@ export default function () {
 
 
 export function handleSummary(data) {
-  const htmlFile = `report/stress_test.html`
+  const htmlFile = `report/resilience_test.html`
   return {
     [htmlFile]: htmlReport(data),
     stdout: JSON.stringify(data),
