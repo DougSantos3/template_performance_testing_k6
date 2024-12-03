@@ -21,7 +21,7 @@ const emailsData = new SharedArray("E-mails para Teste", function () {
     return papaparse.parse(open('../massas/emails.csv'), { header: true }).data
 })
 
-export let options = {
+export const options = {
     vus: 100,
     stages: [
       { duration: "10s", target: 0 },       // Começa com 0 usuários

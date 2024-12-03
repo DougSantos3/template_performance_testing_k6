@@ -25,7 +25,7 @@ import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporte
 import { BASE_URL } from '../env/base_url.js'
 
 
-export let options = {
+export const options = {
   stages: [
     { duration: "1m", target: 500 },  // Aumenta gradualmente até 500 usuários
     { duration: "2m", target: 1000 }, // Aumenta gradualmente para 1000 usuários
