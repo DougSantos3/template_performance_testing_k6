@@ -49,10 +49,10 @@
 
 
 ### Saída Terminal
-![Log do Terminal](images/image.png)
-![Log do Terminal](images/image2.png)
+![Log do Terminal](.github/image.png)
+![Log do Terminal](.github/image2.png)
 
 ### Saída Html   
-![Log do html](images/k6_1.png)
-![Log do html](images/k6_2.png)
-![Log do html](images/k6_3.png)
+![Log do html](.github/k6_1.png)
+![Log do html](.github/k6_2.png)
+![Log do html](.github/k6_3.png)
