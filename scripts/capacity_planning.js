@@ -11,55 +11,52 @@ Monitoramento do Sistema:
     Ajustes e Retestes: Após identificar o limite, você pode ajustar recursos do sistema e realizar novos testes de 
     capacidade para verificar a melhora. */
 
-import http from "k6/http"
-import { sleep, check } from "k6"
-import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
+import http from 'k6/http'
+import { check } from 'k6'
+import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js'
 import { BASE_URL } from '../env/base_url.js'
-
 
 export const options = {
   vus: 100,
   stages: [
-    { duration: "2s", target: 1000 }, // Inicializa com 1000 usuários
-    { duration: "2s", target: 1500 }, // Aumenta para 1500 usuários
-    { duration: "2s", target: 2000 }, // Aumenta para 2000 usuários
-    { duration: "2s", target: 2500 }, // Aumenta para 2500 usuários
-    { duration: "2s", target: 3000 }, // Aumenta para 3000 usuários
-    { duration: "2s", target: 3500 }, // Aumenta para 3500 usuários
-    { duration: "2s", target: 4000 }, // Continua aumentando conforme a capacidade observada
-    { duration: "1s", target: 0 }, // Reduz para 0 usuários ao final
+    { duration: '2s', target: 1000 }, // Inicializa com 1000 usuários
+    { duration: '2s', target: 1500 }, // Aumenta para 1500 usuários
+    { duration: '2s', target: 2000 }, // Aumenta para 2000 usuários
+    { duration: '2s', target: 2500 }, // Aumenta para 2500 usuários
+    { duration: '2s', target: 3000 }, // Aumenta para 3000 usuários
+    { duration: '2s', target: 3500 }, // Aumenta para 3500 usuários
+    { duration: '2s', target: 4000 }, // Continua aumentando conforme a capacidade observada
+    { duration: '1s', target: 0 }, // Reduz para 0 usuários ao final
   ],
   thresholds: {
-    http_req_duration: ["p(95)<500"], // 95% das respostas devem ser mais rápidas que 500ms
-    "http_req_duration{staticAsset:yes}": ["p(99)<150"], // 99% dos ativos estáticos devem carregar em menos de 150ms
-    "http_req_duration{staticAsset:no}": ["avg<200", "p(95)<400"], // Tempo médio de resposta deve ser inferior a 200ms, 95% das respostas em menos de 400ms
+    http_req_duration: ['p(95)<500'], // 95% das respostas devem ser mais rápidas que 500ms
+    'http_req_duration{staticAsset:yes}': ['p(99)<150'], // 99% dos ativos estáticos devem carregar em menos de 150ms
+    'http_req_duration{staticAsset:no}': ['avg<200', 'p(95)<400'], // Tempo médio de resposta deve ser inferior a 200ms, 95% das respostas em menos de 400ms
   },
 }
 
 export function setup() {
   const loginRes = http.post(`${BASE_URL}/auth/token/login/`, {
-    username: "your_email@provedor_de_email.com",
-    password: "your_password",
+    username: 'your_email@provedor_de_email.com',
+    password: 'your_password',
   })
-  const token = loginRes.json("access")
+  const token = loginRes.json('access')
   return token
 }
-
 
 export default function () {
   const params_get = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   }
   const res = http.get(`${BASE_URL}/endpoint`, params_get)
 
   check(res, {
-    "status é 200": (r) => r.status === 200,
-    "tempo de resposta < 200ms": (r) => r.timings.duration < 200,
+    'status é 200': (r) => r.status === 200,
+    'tempo de resposta < 200ms': (r) => r.timings.duration < 200,
   })
-  sleep(1)
 }
 
 export function handleSummary(data) {

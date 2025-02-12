@@ -19,40 +19,36 @@
     Essas práticas, aplicadas em conjunto com a carga constante do K6, podem fornecer insights robustos sobre como o sistema 
     reage a interrupções e se mantém resiliente. */
 
-import http from "k6/http"
-import { sleep, check } from "k6"
-import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js"
+import http from 'k6/http'
+import { check } from 'k6'
+import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js'
 import { BASE_URL } from '../env/base_url.js'
-
 
 export const options = {
   stages: [
-    { duration: "1m", target: 500 },  // Aumenta gradualmente até 500 usuários
-    { duration: "2m", target: 1000 }, // Aumenta gradualmente para 1000 usuários
-    { duration: "3m", target: 1500 }, // Aumenta para 1500 usuários e mantém
-    { duration: "1m", target: 1500 }, // Mantém em 1500 usuários para observar estabilidade
-    { duration: "2m", target: 0 },    // Reduz para 0 usuários ao final do teste
+    { duration: '1m', target: 500 }, // Aumenta gradualmente até 500 usuários
+    { duration: '2m', target: 1000 }, // Aumenta gradualmente para 1000 usuários
+    { duration: '3m', target: 1500 }, // Aumenta para 1500 usuários e mantém
+    { duration: '1m', target: 1500 }, // Mantém em 1500 usuários para observar estabilidade
+    { duration: '2m', target: 0 }, // Reduz para 0 usuários ao final do teste
   ],
   thresholds: {
-    http_req_duration: ["p(95)<500"], 
-    "http_req_duration{staticAsset:yes}": ["p(99)<150"],
-    "http_req_duration{staticAsset:no}": ["avg<200", "p(95)<400"],
+    http_req_duration: ['p(95)<500'],
+    'http_req_duration{staticAsset:yes}': ['p(99)<150'],
+    'http_req_duration{staticAsset:no}': ['avg<200', 'p(95)<400'],
   },
 }
 
 export default function () {
-  let payload = JSON.stringify({ key: "value" })
-  let params = { headers: { "Content-Type": "application/json" } }
-
+  let payload = JSON.stringify({ key: 'value' })
+  let params = { headers: { 'Content-Type': 'application/json' } }
 
   let resPut = http.put(`${BASE_URL}/endpoint/${variable}`, payload, params)
   check(resPut, {
-    "PUT status é 200": (r) => r.status === 200,
-    "PUT tempo de resposta < 200ms": (r) => r.timings.duration < 200,
+    'PUT status é 200': (r) => r.status === 200,
+    'PUT tempo de resposta < 200ms': (r) => r.timings.duration < 200,
   })
-  sleep(1)
 }
-
 
 export function handleSummary(data) {
   const htmlFile = `report/resilience_test.html`
