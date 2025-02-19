@@ -15,6 +15,10 @@
 <br>
 `sudo apt install k6`
 
+
+###  Versão do K6
+`0.57.0`
+
 ### Install Windows
 `choco install k6`
 
@@ -28,10 +32,10 @@
 ## Executar os testes
 
 ### Teste de carga(load)
-`k6 run scripts/load_test.js`
+`k6 run --out scripts/load_test.js`
 
 ### Teste de capacidade(capacity planning)
-`k6 run scripts/capacity_planning.js`
+`BASE_URL=https://seusistema.com USERNAME=meu_usuario PASSWORD=minha_senha k6 run seu_teste.js`
 
 ### Teste de pico(spike test)
 `k6 run scripts/spike_test.js`
